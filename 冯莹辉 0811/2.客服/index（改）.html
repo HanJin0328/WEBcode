@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style: none;
+        }
+        body{
+            height: 3000px;
+        }
+        #box{
+            width: 120px;
+            height: 250px;
+            position: fixed;
+            right: -110px;
+            bottom: 20px;
+        }
+        #box li{
+            width: 170px;
+            height: 50px;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            box-sizing: border-box;
+            float: right;
+            overflow: hidden;
+            font-weight: bold;
+
+        }
+        #s1{
+            width: 60px;
+            background-color: #66066e;
+        }
+        #s2{
+            background-color: #8bc58d;
+            transition: width 2s;
+            color: #fff;
+        }
+        #s2:hover{
+            width: 280px;
+        }
+        #s3{
+            background-color: #fff;
+            border: 1px solid #e7766c;
+            transition: width 2s;
+            color: #e7766c;
+        }
+        #s3:hover{
+            width: 280px;
+        }
+        #s4{
+            background-color: #bd3e60;
+            transition: width 2s;
+            color: #fff;
+        }
+        #s4:hover{
+            width: 280px;
+        }
+        .QR{
+            display: none;
+        }
+        .QR img{
+            width: 65px;
+            height: 65px;
+            border: 3px solid #66066e;
+            position: fixed;
+            right: 60px;
+            bottom: 210px;
+            display: block;
+            padding: 5px;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul>
+        <li id="s1"><img src="image/wechat.png"></li>
+        <li id="s2"><img src="image/qq.png">&nbsp;&nbsp;&nbsp;&nbsp;674321055</li>
+        <li id="s3"><img src="image/tellphone.png">&nbsp;&nbsp;&nbsp;&nbsp;05516537</li>
+        <li id="s4"><img src="image/toUP.png">&nbsp;&nbsp;&nbsp;&nbsp;回到顶部</li>
+    </ul>
+</div>
+<div class="QR"><img src="image/QRcode.jpg"></div>
+<script src="jquery191.js"></script>
+<script>
+    $("#s1").hover(function(){
+        $(".QR").toggle(500);
+    })
+    var s4 = document.getElementById("s4");
+    s4.onclick = function () {
+        var timer = setInterval(function () {
+            document.body.scrollTop = document.body.scrollTop - 10;
+            if (document.body.scrollTop === 0) {
+                clearInterval(timer);
+            }
+        }, 3);
+    }
+</script>
+</body>
+</html>
