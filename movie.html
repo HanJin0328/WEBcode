@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>豆瓣电影</title>
+	<style>
+		#app {
+			width: 1000px;
+			margin: 100px auto;
+			border: 1px solid red;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<table border="1" cellpadding="0" cellspacing="0">
+			<caption>正在上映的电影</caption>
+			<tr>
+				<th>序号</th>
+				<th>id</th>
+				<th>电影名</th>
+				<th>年份</th>
+				<th>分类</th>
+				<th>主演</th>
+				<th>票房</th>
+				<th>海报</th>
+				<th>去观影</th>
+			</tr>
+			<tbody id="tb">
+				
+			</tbody>
+			
+
+		</table>
+	</div>
+	
+
+<script src="jquery.min.js"></script>
+<script>
+	$(function () {
+		var db_url = "https://api.douban.com/v2/movie/in_theaters?";
+		var db_data = {"start":0, "count": 30};
+		$.ajax({
+			url: db_url,
+			data: db_data,
+			type: 'get',
+			dataType: 'jsonp',
+			success: function (res) {
+				console.log(res);
+				var html = '';
+				for(var i=0, len=res.subjects.length; i<len; i++){
+					html += "<tr>";
+					html += "<td>"+(i+1)+"</td>"
+					html += "	<td>"+res.subjects[i].id+"</td>";
+					html += "	<td>"+res.subjects[i].title+"</td>";
+					html += "	<td>"+res.subjects[i].year+"</td>";
+					html += "	<td>"+res.subjects[i].subtype+"</td>";
+
+					var zhuyan = '';
+					for(var j=0, len2=res.subjects[i].casts.length; j<len2; j++){
+						zhuyan += res.subjects[i].casts[j].name + " ";
+					}
+
+					html += "	<td>"+ zhuyan +"</td>";
+					html += "	<td>"+res.subjects[i].collect_count+"</td>";
+					html += "	<td><img src='"+res.subjects[i].images.small+"'></td>";
+					html += "	<td><a target='_blank' href='"+res.subjects[i].alt+"'>"+"去观影"+"</a></td>";
+					html += "</tr>";
+				}
+				$("#tb").html(html);
+			},
+			error: function () {
+
+			}
+		});
+	});
+</script>
+</body>
+</html>
